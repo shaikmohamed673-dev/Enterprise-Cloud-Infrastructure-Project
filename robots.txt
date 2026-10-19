@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shaikmohamed673-dev.github.io/cognevance_static_website_deployment/sitemap.xml

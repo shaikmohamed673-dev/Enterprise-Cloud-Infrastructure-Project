@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600" fill="none">
+  <defs>
+    <linearGradient id="monBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </linearGradient>
+    <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.0"/>
+    </linearGradient>
+    <filter id="mShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="600" fill="url(#monBg)"/>
+
+  <!-- Top App Navigation -->
+  <g transform="translate(40, 25)">
+    <rect width="920" height="60" rx="10" fill="#111827" stroke="#1f2937" stroke-width="1.5" filter="url(#mShadow)"/>
+    <circle cx="35" cy="30" r="12" fill="#10b981" fill-opacity="0.2"/>
+    <circle cx="35" cy="30" r="6" fill="#10b981"/>
+    <text x="60" y="36" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#f8fafc">Synthetic Observability &amp; SLA Monitor</text>
+    <rect x="740" y="16" width="160" height="28" rx="14" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1"/>
+    <text x="760" y="34" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#34d399">● STATUS: OPERATIONAL</text>
+  </g>
+
+  <!-- 4 Summary KPI Widgets -->
+  <g transform="translate(40, 105)">
+    <!-- KPI 1 -->
+    <rect x="0" y="0" width="215" height="90" rx="10" fill="#111827" stroke="#1f2937" stroke-width="1" filter="url(#mShadow)"/>
+    <text x="18" y="28" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="600">OVERALL UPTIME (30 DAYS)</text>
+    <text x="18" y="60" font-family="system-ui, sans-serif" font-size="26" font-weight="800" fill="#10b981">100.00%</text>
+    <text x="18" y="78" font-family="system-ui, sans-serif" font-size="9" fill="#34d399">0 Incidents reported</text>
+
+    <!-- KPI 2 -->
+    <rect x="235" y="0" width="215" height="90" rx="10" fill="#111827" stroke="#1f2937" stroke-width="1" filter="url(#mShadow)"/>
+    <text x="253" y="28" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="600">AVG RESPONSE LATENCY</text>
+    <text x="253" y="60" font-family="system-ui, sans-serif" font-size="26" font-weight="800" fill="#38bdf8">28.4 ms</text>
+    <text x="253" y="78" font-family="system-ui, sans-serif" font-size="9" fill="#38bdf8">-4ms vs target threshold</text>
+
+    <!-- KPI 3 -->
+    <rect x="470" y="0" width="215" height="90" rx="10" fill="#111827" stroke="#1f2937" stroke-width="1" filter="url(#mShadow)"/>
+    <text x="488" y="28" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="600">SSL CERTIFICATE VALIDITY</text>
+    <text x="488" y="60" font-family="system-ui, sans-serif" font-size="24" font-weight="800" fill="#a855f7">89 Days</text>
+    <text x="488" y="78" font-family="system-ui, sans-serif" font-size="9" fill="#a855f7">Auto-renewal enabled</text>
+
+    <!-- KPI 4 -->
+    <rect x="705" y="0" width="215" height="90" rx="10" fill="#111827" stroke="#1f2937" stroke-width="1" filter="url(#mShadow)"/>
+    <text x="723" y="28" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" font-weight="600">LIGHTHOUSE PERFORMANCE</text>
+    <text x="723" y="60" font-family="system-ui, sans-serif" font-size="26" font-weight="800" fill="#fbbf24">100 / 100</text>
+    <text x="723" y="78" font-family="system-ui, sans-serif" font-size="9" fill="#fbbf24">A+ Grade Performance</text>
+  </g>
+
+  <!-- Big Latency Line Chart -->
+  <g transform="translate(40, 215)">
+    <rect width="600" height="345" rx="10" fill="#111827" stroke="#1f2937" stroke-width="1" filter="url(#mShadow)"/>
+    <text x="25" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f8fafc">Global Multi-Location Synthetic Response Time (24 Hours)</text>
+    <text x="25" y="52" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8">Probing points: North America, Europe, Asia-Pacific (Heartbeat: 60s)</text>
+
+    <!-- Chart Grid lines -->
+    <g stroke="#1f2937" stroke-width="1">
+      <line x1="50" y1="90" x2="560" y2="90"/>
+      <line x1="50" y1="145" x2="560" y2="145"/>
+      <line x1="50" y1="200" x2="560" y2="200"/>
+      <line x1="50" y1="255" x2="560" y2="255"/>
+      <line x1="50" y1="300" x2="560" y2="300"/>
+    </g>
+
+    <!-- Axis Labels -->
+    <text x="20" y="94" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">80ms</text>
+    <text x="20" y="149" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">60ms</text>
+    <text x="20" y="204" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">40ms</text>
+    <text x="20" y="259" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">20ms</text>
+    <text x="25" y="304" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">0ms</text>
+
+    <!-- Area polygon under curve -->
+    <polygon points="50,240 85,235 120,242 155,230 190,225 225,238 260,220 295,225 330,215 365,228 400,222 435,230 470,225 505,218 540,224 560,220 560,300 50,300" fill="url(#chartGrad)"/>
+    <!-- Line curve -->
+    <polyline points="50,240 85,235 120,242 155,230 190,225 225,238 260,220 295,225 330,215 365,228 400,222 435,230 470,225 505,218 540,224 560,220" stroke="#38bdf8" stroke-width="2.5" fill="none"/>
+    <circle cx="560" cy="220" r="4" fill="#38bdf8"/>
+    
+    <text x="50" y="325" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">00:00</text>
+    <text x="175" y="325" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">06:00</text>
+    <text x="300" y="325" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">12:00</text>
+    <text x="425" y="325" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">18:00</text>
+    <text x="535" y="325" font-family="system-ui, sans-serif" font-size="10" fill="#38bdf8">Live</text>
+  </g>
+
+  <!-- Side Card: Active Heartbeat Checks -->
+  <g transform="translate(660, 215)">
+    <rect width="300" height="345" rx="10" fill="#111827" stroke="#1f2937" stroke-width="1" filter="url(#mShadow)"/>
+    <text x="20" y="35" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f8fafc">Monitored Endpoints</text>
+    
+    <!-- Item 1 -->
+    <g transform="translate(15, 55)">
+      <rect width="270" height="52" rx="6" fill="#0f172a" stroke="#1f2937" stroke-width="1"/>
+      <circle cx="16" cy="26" r="4" fill="#10b981"/>
+      <text x="28" y="24" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#f8fafc">Production Root (/)</text>
+      <text x="28" y="40" font-family="monospace" font-size="9" fill="#94a3b8">HTTP 200 OK • 26ms</text>
+      <text x="210" y="32" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#34d399">100% UP</text>
+    </g>
+
+    <!-- Item 2 -->
+    <g transform="translate(15, 115)">
+      <rect width="270" height="52" rx="6" fill="#0f172a" stroke="#1f2937" stroke-width="1"/>
+      <circle cx="16" cy="26" r="4" fill="#10b981"/>
+      <text x="28" y="24" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#f8fafc">Health Check (/health.json)</text>
+      <text x="28" y="40" font-family="monospace" font-size="9" fill="#94a3b8">Payload valid • 22ms</text>
+      <text x="210" y="32" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#34d399">100% UP</text>
+    </g>
+
+    <!-- Item 3 -->
+    <g transform="translate(15, 175)">
+      <rect width="270" height="52" rx="6" fill="#0f172a" stroke="#1f2937" stroke-width="1"/>
+      <circle cx="16" cy="26" r="4" fill="#10b981"/>
+      <text x="28" y="24" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#f8fafc">SSL / TLS 1.3 Handshake</text>
+      <text x="28" y="40" font-family="monospace" font-size="9" fill="#94a3b8">Valid cert • 14ms</text>
+      <text x="210" y="32" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#34d399">SECURE</text>
+    </g>
+
+    <!-- Item 4 -->
+    <g transform="translate(15, 235)">
+      <rect width="270" height="52" rx="6" fill="#0f172a" stroke="#1f2937" stroke-width="1"/>
+      <circle cx="16" cy="26" r="4" fill="#10b981"/>
+      <text x="28" y="24" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#f8fafc">Anycast DNS Resolution</text>
+      <text x="28" y="40" font-family="monospace" font-size="9" fill="#94a3b8">Route 53 / Fastly • 8ms</text>
+      <text x="210" y="32" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#34d399">PASS</text>
+    </g>
+
+    <text x="20" y="320" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">Integrated with UptimeRobot &amp; Better Stack</text>
+  </g>
+</svg>
