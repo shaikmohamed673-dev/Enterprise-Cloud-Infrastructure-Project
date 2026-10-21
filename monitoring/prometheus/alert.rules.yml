@@ -1,0 +1,62 @@
+groups:
+  - name: enterprise_infrastructure_alerts
+    rules:
+      # 1. Instance / Service Unreachable
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service instance down (instance {{ $labels.instance }})"
+          description: "{{ $labels.job }} target {{ $labels.instance }} has been unreachable for more than 1 minute."
+
+      # 2. Host CPU Load Exceeded
+      - alert: HostHighCpuLoad
+        expr: (sum by (instance) (rate(node_cpu_seconds_total{mode!="idle"}[5m])) / sum by (instance) (rate(node_cpu_seconds_total[5m]))) * 100 > 85
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Host high CPU usage on {{ $labels.instance }}"
+          description: "CPU load exceeds 85% for more than 2 minutes. Current value: {{ $value }}%"
+
+      # 3. Host Memory Exhaustion
+      - alert: HostOutOfMemory
+        expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 < 10
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Host running out of memory on {{ $labels.instance }}"
+          description: "Available host memory is under 10%. Immediate action required."
+
+      # 4. Host Disk Capacity Critical
+      - alert: HostDiskSpaceFillingUp
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 15
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Disk space low on {{ $labels.instance }}"
+          description: "Root partition free space is below 15%."
+
+      # 5. Container High Memory Utilization
+      - alert: ContainerHighMemoryUsage
+        expr: (container_memory_usage_bytes{name!=""} / container_spec_memory_limit_bytes{name!=""}) * 100 > 90
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container {{ $labels.name }} nearing memory limit"
+          description: "Container {{ $labels.name }} is using > 90% of its memory limit."
+
+      # 6. High API Latency SLA Violation
+      - alert: HighRequestLatency
+        expr: histogram_quantile(0.95, sum(rate(enterprise_http_request_duration_seconds_bucket[5m])) by (le, endpoint)) > 1.0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "API 95th percentile latency exceeding SLA"
+          description: "Endpoint {{ $labels.endpoint }} p95 response time is over 1.0s."

@@ -1,0 +1,137 @@
+version: "3.8"
+
+# ==============================================================================
+# Local Development docker-compose
+# Use this for fast single-machine development iteration WITHOUT Swarm mode.
+# Run: docker compose up -d
+# ==============================================================================
+
+networks:
+  frontend-net:
+    driver: bridge
+  backend-net:
+    driver: bridge
+  monitoring-net:
+    driver: bridge
+
+volumes:
+  postgres-dev-data:
+  redis-dev-data:
+  prometheus-dev-data:
+  grafana-dev-data:
+
+services:
+  # --- Reverse Proxy -----------------------------------------------------------
+  nginx:
+    image: nginx:1.25-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./app/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - frontend-net
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # --- FastAPI Application -----------------------------------------------------
+  api:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    environment:
+      - ENVIRONMENT=development
+      - PORT=8000
+    networks:
+      - frontend-net
+      - backend-net
+      - monitoring-net
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/liveness')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    restart: unless-stopped
+
+  # --- Redis Cache -------------------------------------------------------------
+  redis:
+    image: redis:7.2-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "128mb", "--maxmemory-policy", "allkeys-lru"]
+    volumes:
+      - redis-dev-data:/data
+    networks:
+      - backend-net
+    restart: unless-stopped
+
+  # --- PostgreSQL Database -----------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=enterprise_db
+      - POSTGRES_USER=enterprise_user
+      - POSTGRES_PASSWORD=local_dev_password_2026
+    volumes:
+      - postgres-dev-data:/var/lib/postgresql/data
+    networks:
+      - backend-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U enterprise_user -d enterprise_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # --- Prometheus Monitoring ---------------------------------------------------
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=3d"
+      - "--web.enable-lifecycle"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/prometheus/alert.rules.yml:/etc/prometheus/alert.rules.yml:ro
+      - prometheus-dev-data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring-net
+    restart: unless-stopped
+
+  # --- Grafana Dashboards ------------------------------------------------------
+  grafana:
+    image: grafana/grafana:10.4.1
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin_secure_cloud
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-dev-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring-net
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+  # --- cAdvisor (Container Metrics) -------------------------------------------
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "8081:8080"
+    networks:
+      - monitoring-net
+    restart: unless-stopped

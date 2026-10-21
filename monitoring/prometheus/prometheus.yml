@@ -1,0 +1,51 @@
+# ==============================================================================
+# Prometheus Configuration for Docker Swarm Cloud Infrastructure
+# ==============================================================================
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+  external_labels:
+    cluster: 'enterprise-swarm-prod'
+    environment: 'production'
+
+rule_files:
+  - "alert.rules.yml"
+
+# Alertmanager configuration (optional endpoint)
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+scrape_configs:
+  # 1. Scrape Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # 2. Scrape Host Node Exporters (Global Swarm Service DNS)
+  - job_name: 'node-exporter'
+    dns_sd_configs:
+      - names:
+          - 'tasks.node-exporter'
+        type: 'A'
+        port: 9100
+
+  # 3. Scrape cAdvisor Container Metrics (Global Swarm Service DNS)
+  - job_name: 'cadvisor'
+    dns_sd_configs:
+      - names:
+          - 'tasks.cadvisor'
+        type: 'A'
+        port: 8080
+
+  # 4. Scrape Application Microservice Custom Metrics & Latency
+  - job_name: 'enterprise-api'
+    metrics_path: '/metrics'
+    dns_sd_configs:
+      - names:
+          - 'tasks.api'
+        type: 'A'
+        port: 8000

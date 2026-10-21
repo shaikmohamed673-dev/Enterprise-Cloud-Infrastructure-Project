@@ -1,25 +1,11 @@
-# OS Files
-Thumbs.db
-Desktop.ini
-.DS_Store
-
-# Editor directories and files
-.idea/
-.vscode/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# Terraform local state and files
+# Terraform
 **/.terraform/*
 *.tfstate
 *.tfstate.*
 crash.log
 crash.*.log
 *.tfvars
-*.tfvars.json
+!*.tfvars.example
 override.tf
 override.tf.json
 *_override.tf
@@ -27,8 +13,59 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-# Temporary files and logs
+# Docker / Environment variables
+.env
+.env.local
+.env.*.local
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Operating System & IDEs
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# Keys & Certificates
+*.pem
+*.key
+*.cert
+*.crt
+id_rsa
+id_rsa.pub
+
+# Database local storage & logs
+data/
+pgdata/
+prometheus_data/
+grafana_data/
+
+# Student Teaching Materials (Remove or unignore before final push if required)
+# TEACH_ME/

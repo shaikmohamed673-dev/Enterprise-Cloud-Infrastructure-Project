@@ -1,0 +1,23 @@
+[DEFAULT]
+bantime  = 1h
+findtime = 10m
+maxretry = 4
+banaction = ufw
+
+[sshd]
+enabled = true
+port    = ssh
+logpath = %(sshd_log)s
+backend = %(default_backend)s
+maxretry = 3
+
+[nginx-http-auth]
+enabled = true
+port    = http,https
+logpath = /var/log/nginx/error.log
+
+[nginx-botsearch]
+enabled = true
+port    = http,https
+logpath = /var/log/nginx/access.log
+maxretry = 2
