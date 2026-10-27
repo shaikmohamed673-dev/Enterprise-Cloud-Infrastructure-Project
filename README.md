@@ -126,7 +126,6 @@ enterprise-cloud-devops-automation/
 │   ├── DISASTER_RECOVERY.md           # RTO/RPO targets, failover, and DR runbook
 │   ├── PERFORMANCE_AND_SCALABILITY.md # Autoscaling, caching, and cost optimizations
 │   └── architecture/                  # High-resolution vector SVG diagrams
-├── TEACH_ME/                          # Comprehensive student tutorial & viva guide
 ├── .gitignore
 ├── LICENSE
 └── README.md

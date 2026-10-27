@@ -67,5 +67,7 @@ pgdata/
 prometheus_data/
 grafana_data/
 
-# Student Teaching Materials (Remove or unignore before final push if required)
-# TEACH_ME/
+# Student Teaching & Viva Materials (Stored externally outside repository)
+TEACH_ME/
+*.teach
+TEACH_ME.md
