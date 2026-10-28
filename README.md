@@ -7,12 +7,10 @@
 [![Docker Swarm](https://img.shields.io/badge/Orchestration-Docker%20Swarm-2496ED?logo=docker&logoColor=white)](docker-swarm/)
 [![Monitoring](https://img.shields.io/badge/Observability-Prometheus%20%2B%20Grafana-F46800?logo=prometheus&logoColor=white)](monitoring/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-> **Cognevance Internship Project Submission**  
+ 
 > **Project Title:** Enterprise Cloud Infrastructure & DevOps Automation  
 > **Author:** Shaik Mohamed ([shaikmohamed673-dev](https://github.com/shaikmohamed673-dev))  
-> **Email:** shaikmohamed673@gmail.com  
-> **Submission Destination:** support@cognevance.online  
+> **Email:** shaikmohamed673@gmail.com   
 
 ---
 
@@ -127,7 +125,6 @@ enterprise-cloud-devops-automation/
 │   ├── PERFORMANCE_AND_SCALABILITY.md # Autoscaling, caching, and cost optimizations
 │   └── architecture/                  # High-resolution vector SVG diagrams
 ├── .gitignore
-├── LICENSE
 └── README.md
 ```
 
@@ -193,8 +190,3 @@ Execute an automated encrypted database backup to AWS S3:
 ```bash
 bash scripts/backup/backup-database.sh
 ```
-
----
-
-## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
