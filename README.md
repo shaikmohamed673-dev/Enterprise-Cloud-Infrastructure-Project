@@ -40,21 +40,6 @@ The system is designed to provide:
 
 ---
 
-## 🛠️ Project Tasks Breakdown & Deliverables
-
-| Task # | Task Description | Deliverable / Implementation Reference | Status |
-|:---:|:---|:---|:---:|
-| **1** | **Scalable Cloud Architecture (AWS)** | Multi-AZ VPC (`10.0.0.0/16`), Public/Private subnets, Dual NAT Gateways, ALB. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | ✅ Complete |
-| **2** | **Infrastructure as Code (Terraform)** | Production & staging environments with reusable modules (`vpc`, `alb`, `compute_swarm`, `iam`, `s3_backups`, `security_groups`). See [terraform/](terraform/) | ✅ Complete |
-| **3** | **Docker Swarm Cluster Orchestration** | Manager/Worker cluster bootstrap, Raft consensus, overlay networks (`frontend-net`, `backend-net`, `monitoring-net`), rolling updates. See [docker-swarm/](docker-swarm/) | ✅ Complete |
-| **4** | **Automated CI/CD Workflows** | GitHub Actions pipelines for Terraform linting/validation, pytest unit testing, Trivy container security scans, and rolling deployment. See [.github/workflows/](.github/workflows/) | ✅ Complete |
-| **5** | **Monitoring & Logging (Prometheus & Grafana)** | Prometheus metrics scraper, alerting rules (`alert.rules.yml`), pre-configured Grafana dashboards, cAdvisor, Node Exporter, and Loki. See [monitoring/](monitoring/) | ✅ Complete |
-| **6** | **Security, Backups & Disaster Recovery** | CIS sysctl hardening (`harden-node.sh`), encrypted PostgreSQL backups to S3 (`backup-database.sh`), DR test suite, and runbook. See [docs/SECURITY.md](docs/SECURITY.md) & [docs/DISASTER_RECOVERY.md](docs/DISASTER_RECOVERY.md) | ✅ Complete |
-| **7** | **Performance & Scalability Optimization** | EC2 Auto Scaling Target Tracking (CPU 70%), Nginx rate limiting and connection pooling, multi-stage image optimization. See [docs/PERFORMANCE_AND_SCALABILITY.md](docs/PERFORMANCE_AND_SCALABILITY.md) | ✅ Complete |
-| **8** | **Comprehensive Architecture & Deployment Docs** | Production deployment guide, formal internship report, monitoring guide, and vector diagrams. See [docs/](docs/) | ✅ Complete |
-
----
-
 ## 📁 Repository Folder Structure
 
 ```text
